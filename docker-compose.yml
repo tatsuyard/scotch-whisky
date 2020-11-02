@@ -1,0 +1,13 @@
+version: "3"
+services:
+  nextjs:
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile
+    container_name: scotch-whisky-front
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    ports:
+      - "3000:3000"
