@@ -14,6 +14,9 @@ const Header = () => (
       <Link href="/brand">
         <a style={linkStyle}>Brand</a>
       </Link>
+      <Link href="/about">
+        <a style={linkStyle}>About</a>
+      </Link>
     </div>
   </div>
 );
