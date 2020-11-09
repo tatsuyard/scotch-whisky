@@ -1,36 +1,48 @@
-import React from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
 
-const Home: React.FC = () => (
-  <div className={styles.container}>
-    <div>
-      <Header />
+type BrandProps = {
+  id?: string,
+  name: string,
+  description: string,
+}
+
+export default function Home(params) {
+  const { db } = params;
+  const [brands, setBrands] = useState<BrandProps[]>([{ id: '', name: '', description: '' }]);
+  
+  useEffect(() => {
+    const col = db.collection("brands").onSnapshot((snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        description: doc.data().description,
+      }))
+      setBrands(data)
+    })
+    return () => {
+      col
+    }
+  }, [])
+  
+
+  return (
+    <div className={styles.container}>
+      <div>
+        <Header />
+      </div>
+      <h1 className={styles.title}>銘柄一覧</h1>
+      {
+        brands.map(brand =>
+        <div className={styles.grid} key={brand.id}>
+          <a href="#" className={styles.card}>
+            <h3>{brand.name} &rarr;</h3>
+            <p>{brand.description}</p>
+          </a>
+        </div>
+        )}
+       
     </div>
-    <h1 className={styles.title}>銘柄一覧</h1>
-
-    <div className={styles.grid}>
-      <a href="#" className={styles.card}>
-        <h3>アイラ &rarr;</h3>
-        <p>アイラについて</p>
-      </a>
-
-      <a href="#" className={styles.card}>
-        <h3>ハイランド &rarr;</h3>
-        <p>ハイランドについて</p>
-      </a>
-
-      <a href="#" className={styles.card}>
-        <h3>スペイサイド &rarr;</h3>
-        <p>スペイサイドについて</p>
-      </a>
-
-      <a href="#" className={styles.card}>
-        <h3>ローランド &rarr;</h3>
-        <p>ローランドについて</p>
-      </a>
-    </div>
-  </div>
-);
-
-export default Home;
+  );
+}
