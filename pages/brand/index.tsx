@@ -1,6 +1,8 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
+import Link from "next/link";
+import { AuthContext } from '../../components/Auth';
 
 type BrandProps = {
   id?: string,
@@ -11,7 +13,16 @@ type BrandProps = {
 export default function Home(params) {
   const { db } = params;
   const [brands, setBrands] = useState<BrandProps[]>([{ id: '', name: '', description: '' }]);
+  const { currentUser } = useContext(AuthContext);
   
+  const CreateLink = () => (
+    !currentUser && (
+      <Link href="brand/new">
+        <a>Create</a>
+      </Link>
+    )
+  ) 
+
   useEffect(() => {
     const col = db.collection("brands").onSnapshot((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
@@ -33,6 +44,7 @@ export default function Home(params) {
         <Header />
       </div>
       <h1 className={styles.title}>銘柄一覧</h1>
+        <CreateLink />
       {
         brands.map(brand =>
         <div className={styles.grid} key={brand.id}>
