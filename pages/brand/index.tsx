@@ -32,6 +32,7 @@ export default function Home(params) {
       <div>
         <Header />
       </div>
+      <main className={styles.main}>
       <h1 className={styles.title}>銘柄一覧</h1>
       {
         brands.map(brand =>
@@ -42,7 +43,7 @@ export default function Home(params) {
           </a>
         </div>
         )}
-       
+       </main>
     </div>
   );
 }
