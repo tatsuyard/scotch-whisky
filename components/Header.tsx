@@ -1,23 +1,24 @@
 import Link from "next/link";
-import styles from "../styles/Header.module.css";
-
-const linkStyle = {
-  marginRight: 15,
-};
 
 const Header = () => (
-  <div className={styles.header}>
-    <div>
-      <Link href="/">
-        <a style={linkStyle}>Home</a>
-      </Link>
-      <Link href="/brand">
-        <a style={linkStyle}>Brand</a>
-      </Link>
-      <Link href="/about">
-        <a style={linkStyle}>About</a>
-      </Link>
-    </div>
+  <div className="">
+    <ul className="flex">
+      <li className="mr-6">
+        <Link href="/">
+          <a className="text-blue-500 hover:text-blue-800">Home</a>
+        </Link>
+      </li>
+      <li className="mr-6">
+        <Link href="/brand">
+          <a className="text-blue-500 hover:text-blue-800">Brand</a>
+        </Link>
+      </li>
+      <li className="mr-6">
+        <Link href="/about">
+          <a className="text-blue-500 hover:text-blue-800">About</a>
+        </Link>
+      </li>
+    </ul>
   </div>
 );
 
