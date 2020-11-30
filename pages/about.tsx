@@ -7,7 +7,10 @@ const About: React.FC = () => (
     <div>
       <Header />
     </div>
-    <h1>About</h1>
+      <main className={styles.main}>
+        <h1 className="title">About</h1>
+        <p className="text-center text-teal-500 text-2xl py-4">This is an About Page.</p>
+      </main>
   </div>
 );
 
