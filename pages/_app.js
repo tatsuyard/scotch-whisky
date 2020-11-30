@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import './styles.css'
 import firebase from "firebase/app";
 import initFirebase from "../firebase/init";
 
