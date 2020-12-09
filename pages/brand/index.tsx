@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
+import ListItem from "../../components/ListItem";
 
 type BrandProps = {
   id?: string,
@@ -36,12 +37,7 @@ export default function Home(params) {
       <h1 className={styles.title}>銘柄一覧</h1>
       {
         brands.map(brand =>
-        <div className={styles.grid} key={brand.id}>
-          <a href="#" className={styles.card}>
-            <h3>{brand.name} &rarr;</h3>
-            <p>{brand.description}</p>
-          </a>
-        </div>
+          <ListItem key={brand.id} item={brand}/>
         )}
        </main>
     </div>
