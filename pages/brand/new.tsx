@@ -26,27 +26,27 @@ const New: React.FC = (params) => {
 
     return (
         <div className={styles.container}>
-        <div>
-            <Header />
-        </div>
-        <div>
+          <div>
+              <Header />
+          </div>
+          <div>
             <h2>
-                <label>
-                    Add Brand 
-                </label>
+              <label>
+                Add Brand 
+              </label>
             </h2>
             <label>
-                name
+              name
             </label>
-                <input
-                  type="text"
-                  name="name"
-                  autoComplete="off"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
+              <input
+                type="text"
+                name="name"
+                autoComplete="off"
+                value={name}
+                onChange={e => setName(e.target.value)}
             />
             <label>
-                description
+              description
             </label>
             <input
               type="text"
@@ -54,11 +54,10 @@ const New: React.FC = (params) => {
               value={desc} 
               onChange={e => setDesc(e.target.value)}
             />
-
             <button onClick={handleSubmit} disabled={!(name && desc)}>
-                    Add
+              Add
             </button>
-        </div>
+          </div>
         </div>
     )
 }
