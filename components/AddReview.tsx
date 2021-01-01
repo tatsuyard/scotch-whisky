@@ -28,12 +28,13 @@ const AddReview: React.FC = () => {
             <label>
               Title
             </label>
-              <input
+            <input
                 type="text"
                 name="title"
                 autoComplete="off"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
+                className="p-2 border"
             />
             <label>
               Review
@@ -43,6 +44,7 @@ const AddReview: React.FC = () => {
               name="review"
               value={review} 
               onChange={e => setReview(e.target.value)}
+              className="p-4 border"
             />
             <button className="btn-blue" onClick={handleSubmit} disabled={!( title && review)}>
               Post
