@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Header = () => (
   <div className="container mx-auto bg-purple-300 p-5">
-    <nav class="flex justify-between">
+    <nav className="flex justify-between">
     <ul className="flex flex-row">
       <li className="pr-5">
         <Link href="/">
