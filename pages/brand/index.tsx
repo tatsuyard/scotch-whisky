@@ -3,6 +3,7 @@ import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
 import Link from "next/link";
 import { AuthContext } from '../../components/Auth';
+import ListItem from "../../components/ListItem";
 
 type BrandProps = {
   id?: string,
@@ -43,18 +44,14 @@ export default function Home(params) {
       <div>
         <Header />
       </div>
+      <main className={styles.main}>
       <h1 className={styles.title}>銘柄一覧</h1>
         <CreateLink />
       {
         brands.map(brand =>
-        <div className={styles.grid} key={brand.id}>
-          <a href="#" className={styles.card}>
-            <h3>{brand.name} &rarr;</h3>
-            <p>{brand.description}</p>
-          </a>
-        </div>
+          <ListItem key={brand.id} item={brand}/>
         )}
-       
+       </main>
     </div>
   );
 }
