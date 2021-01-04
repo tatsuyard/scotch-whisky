@@ -44,6 +44,7 @@ const New: React.FC = (params) => {
                 autoComplete="off"
                 value={name}
                 onChange={e => setName(e.target.value)}
+                className="p-2 border"
             />
             <label>
               description
@@ -53,8 +54,9 @@ const New: React.FC = (params) => {
               name="description"
               value={desc} 
               onChange={e => setDesc(e.target.value)}
+              className="p-4 border"
             />
-            <button onClick={handleSubmit} disabled={!(name && desc)}>
+            <button className="btn-blue" onClick={handleSubmit} disabled={!(name && desc)}>
               Add
             </button>
           </div>
