@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Link from "next/link";
 import { AuthContext } from '../../components/Auth';
 import ListItem from "../../components/ListItem";
+import { Collection } from "../../consts";
 
 type BrandProps = {
   id?: string,
@@ -25,7 +26,7 @@ export default function Home(params) {
   ) 
 
   useEffect(() => {
-    const col = db.collection("brands").onSnapshot((snapshot) => {
+    const col = db.collection(Collection.brands).onSnapshot((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         name: doc.data().name,
