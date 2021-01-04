@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect, useCallback } from "react";
 import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
+import { Collection } from "../../consts";
 
 const New: React.FC = (params) => {
 
@@ -13,8 +14,7 @@ const New: React.FC = (params) => {
         setName('')
         setDesc('')
         try {
-            await console.log(db.collection("brands"))
-            db.collection("brands").add({
+            await db.collection(Collection.brands).add({
                 name: name,
                 description: desc
             })
