@@ -1,3 +1,4 @@
 export const Collection = {
-    brands: 'brands'
+    brands: 'brands',
+    reviews: 'reviews'
 }
