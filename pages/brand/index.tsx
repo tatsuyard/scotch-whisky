@@ -18,9 +18,11 @@ export default function Home(params) {
   const { currentUser } = useContext(AuthContext);
   
   const CreateLink = () => (
-    !currentUser && (
+    currentUser && (
       <Link href="brand/new">
-        <a>Create</a>
+        <button className="btn-blue">
+          Create
+        </button>      
       </Link>
     )
   ) 
