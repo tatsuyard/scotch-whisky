@@ -1,11 +1,13 @@
-import React, { useMemo, useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
 import { Collection } from "../../consts";
+// import initFirebase from "../../firebase/init";
+import firebase from "firebase/app";
 
-const New: React.FC = (params) => {
-
-    const { db } = params;
+// initFirebase();
+const db = firebase.firestore();
+const New: React.FC = () => {
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     
@@ -14,7 +16,7 @@ const New: React.FC = (params) => {
         setName('')
         setDesc('')
         try {
-            await db.collection(Collection.brands).add({
+            db.collection(Collection.brands).add({
                 name: name,
                 description: desc
             })
