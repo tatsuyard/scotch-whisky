@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import { Collection } from "../../consts";
 
 interface Item {
     id?: string,
@@ -20,7 +21,7 @@ const ListItem: React.FC<Props> = (props: Props, params) => {
     const handleDelete = useCallback(() => {
         alert('delete?');
         try {
-            db.collection("brands").doc(props.item.id).delete()
+            db.collection(Collection.brands).doc(props.item.id).delete()
         } catch (error) {
             alert(error)
         }
