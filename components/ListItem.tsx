@@ -1,11 +1,6 @@
 import React, { useCallback } from "react";
 import styles from "../styles/Home.module.css";
-import firebase from "firebase/app";
-import initFirebase from "../firebase/init";
 import Link from "next/link";
-
-initFirebase();
-const db = firebase.firestore();
 
 interface Item {
     id?: string,
@@ -18,7 +13,8 @@ type Props = {
 }
 
 
-const ListItem: React.FC<Props> = (props: Props) => {
+const ListItem: React.FC<Props> = (props: Props, params) => {
+    const { db } = params;
     const item = props.item;
 
     const handleDelete = useCallback(() => {
