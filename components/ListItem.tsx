@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import { Collection } from "../../consts";
+import { Collection } from "../consts";
 
 interface Item {
     id?: string,
