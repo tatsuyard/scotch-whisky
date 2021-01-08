@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
 import { Collection } from "../../consts";
-// import initFirebase from "../../firebase/init";
-import firebase from "firebase/app";
+import initFirebase from "../../firebase/init";
+import firebase from "firebase";
 
-// initFirebase();
+initFirebase();
 const db = firebase.firestore();
 const New: React.FC = () => {
     const [name, setName] = useState('')

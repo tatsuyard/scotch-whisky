@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import styles from "../styles/Home.module.css";
 import firebase from "firebase/app";
-// import initFirebase from "../firebase/init";
+import initFirebase from "../firebase/init";
 import Link from "next/link";
 
-// initFirebase();
+initFirebase();
 const db = firebase.firestore();
 
 interface Item {

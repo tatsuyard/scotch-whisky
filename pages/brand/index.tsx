@@ -18,12 +18,12 @@ export default function Home(params) {
   const { currentUser } = useContext(AuthContext);
   
   const CreateLink = () => (
-    currentUser && (
+    !currentUser && (
       <Link href="brand/new">
         <button className="btn-blue">
           Create
-        </button>      
-      </Link>
+        </button>
+      </Link>        
     )
   ) 
 
@@ -41,20 +41,19 @@ export default function Home(params) {
     }
   }, [])
   
-
   return (
     <div className={styles.container}>
       <div>
         <Header />
       </div>
       <main className={styles.main}>
-      <h1 className={styles.title}>銘柄一覧</h1>
-        <CreateLink />
-      {
-        brands.map(brand =>
-          <ListItem key={brand.id} item={brand}/>
-        )}
-       </main>
+        <h1 className={styles.title}>銘柄一覧</h1>
+      <CreateLink />
+        {
+          brands.map(brand =>
+            <ListItem key={brand.id} item={brand} />
+          )}
+      </main>
     </div>
   );
 }
