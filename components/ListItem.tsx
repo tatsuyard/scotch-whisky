@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import initFirebase from "../firebase/init";
+import firebase from "firebase/app";
 import { Collection } from "../consts";
 
 initFirebase();

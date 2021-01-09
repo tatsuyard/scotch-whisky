@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
 import initFirebase from "../firebase/init";
+import firebase from "firebase/app";
 import { Collection } from "../../consts";
 
 initFirebase();
