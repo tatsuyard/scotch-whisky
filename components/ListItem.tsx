@@ -1,7 +1,11 @@
 import React, { useCallback } from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import initFirebase from "../firebase/init";
 import { Collection } from "../consts";
+
+initFirebase();
+const db = firebase.firestore();
 
 interface Item {
     id?: string,
