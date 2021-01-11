@@ -14,7 +14,7 @@ interface Review {
   createdAt: firebase.firestore.FieldValue | null
 }
 
-const AddReview: React.FC<Review> = (brandId: any) => {
+const AddReview: React.FC<Review> = (brandId: string) => {
 
     const [title, setTitle] = useState('')
     const [review, setReview] = useState('')
