@@ -1,21 +1,44 @@
 import React, { useState } from "react";
+import initFirebase from "../firebase/init";
+import firebase from "firebase/app";
 import { Collection } from "../consts";
 
-const AddReview: React.FC = () => {
+initFirebase();
+const db = firebase.firestore();
+
+interface Review {
+  id?: string,
+  title: string,
+  comment: string,
+  brand: string,
+  createdAt: firebase.firestore.FieldValue | null
+}
+
+const AddReview: React.FC<Review> = (brandId) => {
 
     const [title, setTitle] = useState('')
     const [review, setReview] = useState('')
-    
 
-    const handleSubmit = () => {
-        setTitle('')
-        setReview('')
-        try {
-            console.log('add');
-        } catch (error) {
-            alert(error)
-            // setPending(false);
-        }
+  const handleSubmit = () => {
+    var reviewContent: Review;
+    setTitle('')
+    setReview('')
+    
+    reviewContent = {
+      title: title,
+      comment: review,
+      brand: brandId,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }
+
+    try {
+      db.collection(Collection.reviews).add(reviewContent)
+      console.log('done!')
+    } catch (error) {
+      alert(error)
+      // setPending(false);
+    }
+     
     }
 
     return (
@@ -46,7 +69,7 @@ const AddReview: React.FC = () => {
           onChange={e => setReview(e.target.value)}
           className="p-4 border"
         />
-        <button className="btn-blue" onClick={handleSubmit} disabled={!( title && review)}>
+        <button className="btn-blue" onClick={handleSubmit} disabled={!( title && review )}>
           Post
         </button>
       </div>

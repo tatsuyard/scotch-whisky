@@ -18,7 +18,7 @@ const Brand: React.FC = () => {
                 <p className="text-center text-teal-500 text-2xl py-4">This is an {id} detail Page.</p>
             </main>
             <div>
-                <AddReview />
+                <AddReview brandId={ id } />
             </div>            
         </div>
     )
