@@ -14,7 +14,7 @@ interface Review {
   createdAt: firebase.firestore.FieldValue | null
 }
 
-const AddReview: React.FC<Review> = (brandId) => {
+const AddReview: React.FC<Review> = (brandId: any) => {
 
     const [title, setTitle] = useState('')
     const [review, setReview] = useState('')
@@ -33,7 +33,6 @@ const AddReview: React.FC<Review> = (brandId) => {
 
     try {
       db.collection(Collection.reviews).add(reviewContent)
-      console.log('done!')
     } catch (error) {
       alert(error)
       // setPending(false);
