@@ -8,7 +8,7 @@ import { Collection } from "../consts";
 initFirebase();
 const db = firebase.firestore();
 
-interface Item {
+type Item = {
     id?: string,
     name: string,
     description: string
@@ -19,8 +19,7 @@ type Props = {
 }
 
 
-const ListItem: React.FC<Props> = (props: Props, params) => {
-    const { db } = params;
+const ListItem: React.FC<Props> = (props: Props) => {
     const item = props.item;
 
     const handleDelete = useCallback(() => {
@@ -34,7 +33,7 @@ const ListItem: React.FC<Props> = (props: Props, params) => {
 
     return (
         <div className={styles.grid}>
-            <Link href={`/brand/${encodeURIComponent(item.name)}`}>
+            <Link href={{ pathname: `/brand/${item.id}`, query: { id: item.id }}}>
             <a className={styles.card}>
                 <h3>{item.name} &rarr;</h3>
                 <p>{item.description}</p>
