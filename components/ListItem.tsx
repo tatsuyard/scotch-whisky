@@ -33,7 +33,7 @@ const ListItem: React.FC<Props> = (props: Props) => {
 
     return (
         <div className={styles.grid}>
-            <Link href={{ pathname: `/brand/${item.id}`, query: { id: item.id }}}>
+            <Link href={`/brand/${encodeURIComponent(item.id)}?name=${item.name}`}>
             <a className={styles.card}>
                 <h3>{item.name} &rarr;</h3>
                 <p>{item.description}</p>
