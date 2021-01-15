@@ -6,16 +6,17 @@ import { useRouter } from "next/router"
 
 const Brand: React.FC = () => {
     const router = useRouter()
-    const { id } = router.query
-
+    const { name, id } = router.query
+    
     return (
         <div className={styles.container}>
             <div>
                 <Header />
             </div>
+            
             <main className={styles.main}>
-                <h1 className="title">Brand: {id}</h1>
-                <p className="text-center text-teal-500 text-2xl py-4">This is an {id} detail Page.</p>
+                <h1 className="title">Brand: {name}</h1>
+                <p className="text-center text-teal-500 text-2xl py-4">This is an {name} detail Page.</p>
             </main>
             <div>
                 <AddReview brandId={ id } />
