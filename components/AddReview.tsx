@@ -1,33 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import initFirebase from "../firebase/init";
 import firebase from "firebase/app";
 import { Collection } from "../consts";
+import { models } from "../models"
 
 initFirebase();
 const db = firebase.firestore();
 
-interface Review {
-  id?: string,
-  title: string,
-  comment: string,
-  brand: string,
-  createdAt: firebase.firestore.FieldValue | null
+type Props = {
+  brandId: string
 }
 
-const AddReview: React.FC<Review> = (brandId: string) => {
-
-    const [title, setTitle] = useState('')
-    const [review, setReview] = useState('')
-
+const AddReview: React.FC<Props> = (props: Props) => {
+  // [id].tsxに持って行った方が良いのではないだろう
+  const [title, setTitle] = useState('')
+  const [review, setReview] = useState('')
+  
   const handleSubmit = () => {
-    var reviewContent: Review;
+    var reviewContent: models.Review;
     setTitle('')
     setReview('')
     
     reviewContent = {
       title: title,
       comment: review,
-      brand: brandId,
+      brand: props.brandId,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     }
 
@@ -35,7 +32,6 @@ const AddReview: React.FC<Review> = (brandId: string) => {
       db.collection(Collection.reviews).add(reviewContent)
     } catch (error) {
       alert(error)
-      // setPending(false);
     }
      
     }
@@ -51,12 +47,12 @@ const AddReview: React.FC<Review> = (brandId: string) => {
           Title
         </label>
         <input
-            type="text"
-            name="title"
-            autoComplete="off"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            className="p-2 border"
+          type="text"          
+          name="title"
+          autoComplete="off"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          className="p-2 border"
         />
         <label>
           Review
