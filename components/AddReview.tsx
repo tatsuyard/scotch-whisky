@@ -2,7 +2,7 @@ import React, { useState, ReactNode } from "react";
 import initFirebase from "../firebase/init";
 import firebase from "firebase/app";
 import { Collection } from "../consts";
-import { models } from "../models"
+import { Review } from "../models"
 
 initFirebase();
 const db = firebase.firestore();
@@ -12,18 +12,17 @@ type Props = {
 }
 
 const AddReview: React.FC<Props> = (props: Props) => {
-  // [id].tsxに持って行った方が良いのではないだろう
-  const [title, setTitle] = useState('')
-  const [review, setReview] = useState('')
+  const [review, setReview] = useState<Review>({
+    title: '',
+    comment: '',
+    brand: '',
+    createdAt: ''
+  })
   
   const handleSubmit = () => {
-    var reviewContent: models.Review;
-    setTitle('')
-    setReview('')
-    
-    reviewContent = {
-      title: title,
-      comment: review,
+    var reviewContent = {
+      title: review.title,
+      comment: review.comment,
       brand: props.brandId,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     }
@@ -50,8 +49,8 @@ const AddReview: React.FC<Props> = (props: Props) => {
           type="text"          
           name="title"
           autoComplete="off"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
+          value={review.title}
+          onChange={e => setReview({ ...review, title: e.target.value })}
           className="p-2 border"
         />
         <label>
@@ -60,11 +59,11 @@ const AddReview: React.FC<Props> = (props: Props) => {
         <input
           type="text"
           name="review"
-          value={review} 
-          onChange={e => setReview(e.target.value)}
+          value={review.comment} 
+          onChange={e => setReview({ ...review, comment: e.target.value })}
           className="p-4 border"
         />
-        <button className="btn-blue" onClick={handleSubmit} disabled={!( title && review )}>
+        <button className="btn-blue" onClick={handleSubmit} disabled={!( review.title && review.comment )}>
           Post
         </button>
       </div>
