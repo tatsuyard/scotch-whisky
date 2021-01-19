@@ -12,12 +12,12 @@ type Props = {
 };
 
 const AddReview: React.FC<Props> = (props: Props) => {
-  const [review, setReview] = useState<Review>({
-    title: '',
-    comment: '',
-    brand: '',
-    createdAt: null,
-  });
+const [review, setReview] = useState<Review>({
+  title: '',
+  comment: '',
+  brand: '',
+  createdAt: null,
+});
 
   const handleSubmit = () => {
     var reviewContent = {
@@ -29,6 +29,13 @@ const AddReview: React.FC<Props> = (props: Props) => {
 
     try {
       db.collection(Collection.reviews).add(reviewContent);
+      reviewContent = {
+        title: '',
+        comment: '',
+        brand: '',
+        createdAt: null,
+      };
+      setReview(reviewContent)
     } catch (error) {
       alert(error);
     }
