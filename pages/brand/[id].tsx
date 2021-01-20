@@ -16,17 +16,17 @@ const Brand: React.FC = () => {
   const [reviews, setReviews] = useState<[]>([])
     
 
-  useEffect(async() => {
-      const querySnapshot = await db.collection(Collection.reviews).where('brand', '==', id).get()
-      const data = querySnapshot.docs.map(doc => {
-        return doc.data()
-      });
-      console.log(data)
-      setReviews(data)
+    useEffect(() => {
+      const col = db.collection(Collection.reviews).where('brand', '==', id).onSnapshot((snapshot) => {
+        const data = snapshot.docs.map(doc => {
+          return doc.data()
+        })
+        setReviews(data)
+      })
       return () => {
-        querySnapshot
+        col
       }
-  }, [])
+    }, [])
     
   return (
     <div className={styles.container}>
@@ -38,8 +38,6 @@ const Brand: React.FC = () => {
         <h1 className="title">Brand: {name}</h1>
               <p className="text-center text-teal-500 text-2xl py-4">This is an {name} detail Page.</p>
               <h2>reviews</h2>
-          
-          
               {
                   reviews.map(review =>
                     <div>

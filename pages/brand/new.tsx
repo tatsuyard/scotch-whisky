@@ -15,7 +15,7 @@ const New: React.FC = () => {
     
   const handleSubmit = async () => {
     try {
-      db.collection(Collection.brands).add({      
+      await db.collection(Collection.brands).add({      
         name: brand.name,
         description: brand.description
       })
