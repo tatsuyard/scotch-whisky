@@ -14,7 +14,7 @@ const db = firebase.firestore();
 const Brand: React.FC = () => {
   const router = useRouter();
   const { name, id } = router.query;
-  const [reviews, setReviews] = useState<[Review]>([
+  const [reviews, setReviews] = useState<Review[]>([
     {
       id: '',
       title: '',
