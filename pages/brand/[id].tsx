@@ -21,7 +21,7 @@ const Brand: React.FC = () => {
       comment: '',
       brand: '',
       createdAt: null,
-    },
+    }
   ]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Brand: React.FC = () => {
       .where('brand', '==', id)
       .onSnapshot((snapshot) => {
         const data = snapshot.docs.map((doc) => {
-          return doc.data();
+          return doc.data() as Review; // FIXME: 型アサーションが破壊的なためFirestoreDataConverterを使うべき
         });
         setReviews(data);
       });
@@ -53,9 +53,9 @@ const Brand: React.FC = () => {
           {reviews.map((review) => (
             <div className="border-4 border-light-blue-500 border-opacity-30">
               <div className="flex-grow p-3">
-                <div class="font-semibold text-gray-700">{review.title}</div>
+                <div className="font-semibold text-gray-700">{review.title}</div>
               </div>
-              <div class="text-sm text-gray-500">{review.comment}</div>
+              <div className="text-sm text-gray-500">{review.comment}</div>
             </div>
           ))}
         </div>
