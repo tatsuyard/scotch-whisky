@@ -5,16 +5,12 @@ import Link from "next/link";
 import { AuthContext } from '../../components/Auth';
 import ListItem from "../../components/ListItem";
 import { Collection } from "../../consts";
+import { Brand } from '../../models';
 
-type BrandProps = {
-  id?: string,
-  name: string,
-  description: string,
-}
 
 export default function Home(params) {
   const { db } = params;
-  const [brands, setBrands] = useState<BrandProps[]>([{ id: '', name: '', description: '' }]);
+  const [brands, setBrands] = useState<Brand[]>([{ id: '', name: '', description: '' }]);
   const { currentUser } = useContext(AuthContext);
   
   const CreateLink = () => (
