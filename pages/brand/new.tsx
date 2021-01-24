@@ -30,13 +30,13 @@ const New: React.FC = () => {
         <div>
           <Header />
         </div>
-        <div>
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
           <h2>
-            <label>              
+            <label className="block text-grey-darker text-sm font-bold mb-2">              
               Add Brand 
             </label>
           </h2>
-          <label>  
+          <label className="block text-grey-darker text-sm font-bold mb-2">  
             name
           </label>
           <input
@@ -45,9 +45,9 @@ const New: React.FC = () => {
             autoComplete="off"
             value={brand.name}
             onChange={e => setBrand({...brand, name: e.target.value})}
-            className="p-2 border"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
           />
-          <label>
+          <label className="block text-grey-darker text-sm font-bold mb-2">
             description   
           </label>
           <input
@@ -55,7 +55,7 @@ const New: React.FC = () => {
             name="description"
             value={brand.description} 
             onChange={e => setBrand({...brand, description: e.target.value})}
-            className="p-4 border"
+            className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
           />
           <button className="btn-blue" onClick={handleSubmit} disabled={!(brand.name && brand.description)}>
             Add
