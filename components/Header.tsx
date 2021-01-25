@@ -1,17 +1,26 @@
 import { FC, useContext } from 'react';
 import Link from "next/link";
 import { AuthContext } from './Auth';
+import firebase from "firebase/app";
 
 const Header: FC = () => {
   const { currentUser } = useContext(AuthContext);
 
-  const SignInLink = () => (
-    !currentUser && (
-      <li className="pr-5">
-        <Link href="/signin">
-          <a className="text-blue-500 hover:text-blue-800">SignIn</a>
-        </Link>
-      </li>
+  const SignInOrOutLink = () => (
+    currentUser ? (
+      <>
+        <li className="pr-5">
+          <a href="#" className="text-blue-500 hover:text-blue-800" onClick={() => { firebase.auth().signOut();}}>SignOut</a>
+        </li>
+      </>
+    ) : (
+      <>
+        <li className="pr-5">
+          <Link href="/signin">
+            <a className="text-blue-500 hover:text-blue-800">SignIn</a>
+          </Link>
+        </li>
+      </>
     )
   )
 
@@ -34,7 +43,7 @@ const Header: FC = () => {
               <a className="text-blue-500 hover:text-blue-800">About</a>
             </Link>
           </li>
-          <SignInLink />
+          <SignInOrOutLink />
         </ul>
       </nav>
   </div>
