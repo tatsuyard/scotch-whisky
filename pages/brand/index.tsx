@@ -15,7 +15,7 @@ export default function Home(params) {
   
   const CreateLink = () => (
     // FIXME: Error: CreateLink(...): Nothing was returned from render. This usually means a return statement is missing
-    !currentUser && (
+    currentUser && (
       <Link href="brand/new">
         <button className="btn-blue">
           Create
