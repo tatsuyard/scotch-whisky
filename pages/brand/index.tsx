@@ -13,17 +13,6 @@ export default function Home(params) {
   const [brands, setBrands] = useState<Brand[]>([{ id: '', name: '', description: '' }]);
   const { currentUser } = useContext(AuthContext);
   
-  const CreateLink = () => (
-    // FIXME: Error: CreateLink(...): Nothing was returned from render. This usually means a return statement is missing
-    currentUser && (
-      <Link href="brand/new">
-        <button className="btn-blue">
-          Create
-        </button>
-      </Link>        
-    )
-  ) 
-
   useEffect(() => {
     const col = db.collection(Collection.brands).onSnapshot((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
@@ -45,7 +34,14 @@ export default function Home(params) {
       </div>
       <main className={styles.main}>
         <h1 className={styles.title}>銘柄一覧</h1>
-      <CreateLink />
+        {currentUser && (
+          <Link href="brand/new">
+            <button className="btn-blue">
+              Create
+        </button>
+          </Link>
+        )}
+
         {
           brands.map(brand =>
             <ListItem key={brand.id} item={brand} />
