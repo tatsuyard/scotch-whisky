@@ -14,6 +14,7 @@ const db = firebase.firestore();
 const Brand: React.FC = () => {
   const router = useRouter();
   const { name, id } = router.query;
+
   const [reviews, setReviews] = useState<Review[]>([
     {
       id: '',
@@ -25,9 +26,8 @@ const Brand: React.FC = () => {
   ]);
 
   useEffect(() => {
-    const col = db
-      .collection(Collection.reviews)
-      .where('brand', '==', id)
+    const col = db.collection(Collection.reviews)
+      .where(Collection.brands, '==', id)
       .onSnapshot((snapshot) => {
         const data = snapshot.docs.map((doc) => {
           return doc.data() as Review; // FIXME: 型アサーションが破壊的なためFirestoreDataConverterを使うべき
@@ -51,7 +51,7 @@ const Brand: React.FC = () => {
         <h2>reviews</h2>
         <div className="flex flex-col">
           {reviews.map((review) => (
-            <div className="border-4 border-light-blue-500 border-opacity-30">
+            <div key={review.id} className="border-4 border-light-blue-500 border-opacity-30">
               <div className="flex-grow p-3">
                 <div className="font-semibold text-gray-700">{review.title}</div>
               </div>
@@ -60,10 +60,7 @@ const Brand: React.FC = () => {
           ))}
         </div>
       </main>
-
-      <div>
-        <AddReview brandId={Array.isArray(id) ? id[0] : id} />
-      </div>
+      <AddReview brandId={Array.isArray(id) ? id[0] : id} />
     </div>
   );
 };
