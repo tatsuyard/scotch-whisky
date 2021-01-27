@@ -27,7 +27,7 @@ const Brand: React.FC = () => {
 
   useEffect(() => {
     const col = db.collection(Collection.reviews)
-      .where(Collection.brands, '==', id)
+      .where('brand', '==', id)
       .onSnapshot((snapshot) => {
         const data = snapshot.docs.map((doc) => {
           return doc.data() as Review; // FIXME: 型アサーションが破壊的なためFirestoreDataConverterを使うべき
@@ -45,14 +45,14 @@ const Brand: React.FC = () => {
         <Header />
       </div>
 
-      <main className={styles.main}>
+      <main className="">
         <h1 className="title">Brand: {name}</h1>
         <p className="text-center text-teal-500 text-2xl py-4">This is an {name} detail Page.</p>
         <h2>reviews</h2>
-        <div className="flex flex-col">
+        <div className="pt-4">
           {reviews.map((review) => (
-            <div key={review.id} className="border-4 border-light-blue-500 border-opacity-30">
-              <div className="flex-grow p-3">
+            <div key={review.id} className="bg-white rounded-lg p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
+              <div className="flex flex-row justify-center mr-2">
                 <div className="font-semibold text-gray-700">{review.title}</div>
               </div>
               <div className="text-sm text-gray-500">{review.comment}</div>
