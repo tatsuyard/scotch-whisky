@@ -46,8 +46,8 @@ const Header: FC = () => {
           <SignInOrOutLink />
         </ul>
       </nav>
-  </div>
-    )
+    </div>
+  )
 
 };
 

@@ -13,6 +13,14 @@ export default function Home(params) {
   const [brands, setBrands] = useState<Brand[]>([{ id: '', name: '', description: '' }]);
   const { currentUser } = useContext(AuthContext);
   
+  const CreateLink = () => (
+    <Link href="brand/new">
+      <button className="btn-blue">
+        Create
+      </button>
+    </Link>
+  )
+
   useEffect(() => {
     const col = db.collection(Collection.brands).onSnapshot((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
@@ -34,14 +42,7 @@ export default function Home(params) {
       </div>
       <main className={styles.main}>
         <h1 className={styles.title}>銘柄一覧</h1>
-        {currentUser && (
-          <Link href="brand/new">
-            <button className="btn-blue">
-              Create
-        </button>
-          </Link>
-        )}
-
+        { currentUser && <CreateLink /> }
         {
           brands.map(brand =>
             <ListItem key={brand.id} item={brand} />
