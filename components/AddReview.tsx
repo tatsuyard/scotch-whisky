@@ -54,7 +54,7 @@ const AddReview: React.FC<Props> = (props: Props) => {
           autoComplete="off"
           value={review.title}
           onChange={(e) => setReview({ ...review, title: e.target.value })}
-          className="p-2 border"
+          className="w-full shadow-inner p-2 border-0 mb-2 rounded-lg focus:shadow-outline text-2xl"
         />
       </div>
       <div>
