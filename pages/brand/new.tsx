@@ -30,6 +30,7 @@ const New: React.FC = () => {
         <div>
           <Header />
         </div>
+        <main className={styles.main}>
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
           <h2>
             <label className="block text-grey-darker text-sm font-bold mb-2">              
@@ -55,12 +56,13 @@ const New: React.FC = () => {
             name="description"
             value={brand.description} 
             onChange={e => setBrand({...brand, description: e.target.value})}
-            className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+            className="shadow appearance-none border border-red rounded w-full py-12 px-9 text-grey-darker mb-3"
           />
           <button className="btn-blue" onClick={handleSubmit} disabled={!(brand.name && brand.description)}>
             Add
           </button>
-        </div>
+          </div>
+          </main>
       </div>
     )
 }
