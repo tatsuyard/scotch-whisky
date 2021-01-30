@@ -9,13 +9,13 @@ import { Brand } from "../../models"
 initFirebase();
 const db = firebase.firestore();
 
-type ImageFile = File & {
+type ImageFile = {
   preview: string;
 };
 
 const New: React.FC = () => {
   const [brand, setBrand] = useState<Brand>({ name: '', description: '' })
-  const [file, setFile] = useState<ImageFile[]>({});
+  const [file, setFile] = useState<ImageFile>({ preview: '' });
     
   console.log(file.preview)
 
