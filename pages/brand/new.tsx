@@ -3,6 +3,7 @@ import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
 import initFirebase from "../../firebase/init";
 import firebase from "firebase/app";
+import { useRouter } from 'next/router';
 import { Collection } from "../../consts";
 import { Brand } from "../../models"
 
@@ -16,6 +17,7 @@ type ImageFile = {
 const New: React.FC = () => {
   const [brand, setBrand] = useState<Brand>({ name: '', description: '' })
   const [file, setFile] = useState<ImageFile>({ preview: '' });
+  const router = useRouter()
     
   console.log(file.preview)
 
@@ -32,10 +34,15 @@ const New: React.FC = () => {
         name: brand.name,
         description: brand.description
       })
+      router.push('/brand')
     }
     catch (error) {
       alert(error)
     }
+  }
+
+  const uploadImages = () => {
+    console.log('start upload...')
   }
 
     return (
