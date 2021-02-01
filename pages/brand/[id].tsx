@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import initFirebase from '../../firebase/init';
 import firebase from 'firebase/app';
 import { Collection } from '../../consts';
-import { Review } from '../../models';
+import { Review, Brand as BrandItem } from '../../models';
 
 initFirebase();
 const db = firebase.firestore();
@@ -14,6 +14,7 @@ const db = firebase.firestore();
 const Brand: React.FC = () => {
   const router = useRouter();
   const { name, id } = router.query;
+  const [brandItem, setBrandItem] = useState<BrandItem>({ id: id, name: '', description: '' });
 
   const [reviews, setReviews] = useState<Review[]>([
     {
@@ -39,6 +40,16 @@ const Brand: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const ref = db.collection(Collection.brands).doc(id);
+    ref.get().then((doc) => { 
+      setBrandItem(doc.data());
+    });
+    return () => {
+      ref
+    }
+  }, [])
+
   return (
     <div className={styles.container}>
       <div>
@@ -46,8 +57,10 @@ const Brand: React.FC = () => {
       </div>
 
       <main className="">
-        <h1 className="title">Brand: {name}</h1>
-        <p className="text-center text-teal-500 text-2xl py-4">This is an {name} detail Page.</p>
+        <h1 className="title">{name}</h1>
+        <p className="text-center text-teal-200 text-2xl py-4">
+        {brandItem.description}
+        </p>
         <h2>reviews</h2>
         <div className="pt-4">
           {reviews.map((review) => (
