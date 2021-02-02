@@ -14,7 +14,8 @@ const db = firebase.firestore();
 const Brand: React.FC = () => {
   const router = useRouter();
   const { name, id } = router.query;
-  const [brandItem, setBrandItem] = useState<BrandItem>({ id: id, name: '', description: '' });
+  const brandId = Array.isArray(id) ? id[0] : id
+  const [brandItem, setBrandItem] = useState<BrandItem>({ id: '', name: '', description: '' });
 
   const [reviews, setReviews] = useState<Review[]>([
     {
@@ -41,9 +42,9 @@ const Brand: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const ref = db.collection(Collection.brands).doc(id);
+    const ref = db.collection(Collection.brands).doc(brandId);
     ref.get().then((doc) => { 
-      setBrandItem(doc.data());
+      setBrandItem(doc.data() as BrandItem);
     });
     return () => {
       ref
