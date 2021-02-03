@@ -57,7 +57,7 @@ const Brand: React.FC = () => {
         <Header />
       </div>
 
-      <main className="">
+      <main className={styles.main}>
         <h1 className="title">{name}</h1>
         <p className="text-center text-teal-200 text-2xl py-4">
         {brandItem.description}
