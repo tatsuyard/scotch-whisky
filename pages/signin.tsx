@@ -9,12 +9,12 @@ const SignIn: FC = () => {
     const router = useRouter()
 
     useEffect(() => {
-        currentUser && router.push('/')
+      currentUser && router.push('/')
     }, [currentUser]);
 
     const login = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider);
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithRedirect(provider);
     }
 
     return (
