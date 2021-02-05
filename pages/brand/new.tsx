@@ -3,46 +3,52 @@ import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
 import initFirebase from "../../firebase/init";
 import firebase from "firebase/app";
+import 'firebase/storage'
 import { useRouter } from 'next/router';
 import { Collection } from "../../consts";
 import { Brand } from "../../models"
 
 initFirebase();
 const db = firebase.firestore();
+const storage = firebase.storage()
 
-type ImageFile = {
+type ImageFile = File & {
   preview: string;
 };
 
 const New: React.FC = () => {
   const [brand, setBrand] = useState<Brand>({ name: '', description: '' })
-  const [file, setFile] = useState<ImageFile>({ preview: '' });
+  const [file, setFile] = useState<ImageFile>();
   const router = useRouter()
-    
-  console.log(file.preview)
 
   const handleImageAsFile = (e) => {
+    if (e.target.files === '') {
+      return
+    }
     const image = e.target.files[0]
-    setFile({
-      preview: URL.createObjectURL(image)
-    })
+    setFile(Object.assign(image, { preview: URL.createObjectURL(image) }))
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     try {
-      await db.collection(Collection.brands).add({      
-        name: brand.name,
-        description: brand.description
+      const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+      uploadTask.on('state_changed', console.log, console.error, () => {
+        storage.ref('images')
+          .child(file.name)
+          .getDownloadURL()
+          .then((url) => {
+            db.collection('brands').add({      
+              name: brand.name,
+              description: brand.description,
+              images: url
+            })
+          })
       })
       router.push('/brand')
     }
     catch (error) {
       alert(error)
     }
-  }
-
-  const uploadImages = () => {
-    console.log('start upload...')
   }
 
     return (
@@ -84,7 +90,7 @@ const New: React.FC = () => {
               <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
             </svg>
             <span className="mt-2 text-base leading-normal">Select a file</span>
-              <input type='file' className="hidden" onChange={ handleImageAsFile } />
+              <input type='file' className="hidden" onChange={e => handleImageAsFile(e) } />
           </label>
 
           <button className="btn-blue" onClick={handleSubmit} disabled={!(brand.name && brand.description)}>
