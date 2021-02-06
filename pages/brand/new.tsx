@@ -17,7 +17,12 @@ type ImageFile = File & {
 };
 
 const New: React.FC = () => {
-  const [brand, setBrand] = useState<Brand>({ name: '', description: '' })
+  const [brand, setBrand] = useState<Brand>({
+    name: '',
+    description: '',
+    images: '',
+    createdAt: null
+  })
   const [file, setFile] = useState<ImageFile>();
   const router = useRouter()
 
@@ -40,7 +45,8 @@ const New: React.FC = () => {
             db.collection('brands').add({      
               name: brand.name,
               description: brand.description,
-              images: url
+              images: url,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             })
           })
       })
