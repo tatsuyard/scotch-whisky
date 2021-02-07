@@ -15,7 +15,12 @@ const Brand: React.FC = () => {
   const router = useRouter();
   const { name, id } = router.query;
   const brandId = Array.isArray(id) ? id[0] : id
-  const [brandItem, setBrandItem] = useState<BrandItem>({ id: '', name: '', description: '' });
+  const [brandItem, setBrandItem] = useState<BrandItem>({
+    id: '',
+    name: '',
+    description: '',
+    createdAt: null,
+  });
 
   const [reviews, setReviews] = useState<Review[]>([
     {
