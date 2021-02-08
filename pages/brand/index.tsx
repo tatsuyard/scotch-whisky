@@ -10,7 +10,13 @@ import { Brand } from '../../models';
 
 export default function Home(params) {
   const { db } = params;
-  const [brands, setBrands] = useState<Brand[]>([{ id: '', name: '', description: '' }]);
+  const [brands, setBrands] = useState<Brand[]>([{
+    id: '',
+    name: '',
+    description: '',
+    images: '',
+    createdAt: null,
+  }]);
   const { currentUser } = useContext(AuthContext);
   
   const CreateLink = () => (
