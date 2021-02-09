@@ -4,18 +4,13 @@ import Link from "next/link";
 import initFirebase from "../firebase/init";
 import firebase from "firebase/app";
 import { Collection } from "../consts";
+import { Brand } from '../models';
 
 initFirebase();
 const db = firebase.firestore();
 
-type Item = {
-  id?: string,
-  name: string,
-  description: string
-}
-
 type Props = {
-  item: Item;
+  item: Brand;
 }
 
 const ListItem: React.FC<Props> = (props: Props) => {
@@ -34,7 +29,8 @@ const ListItem: React.FC<Props> = (props: Props) => {
       <Link href={`/brand/${encodeURIComponent(item.id)}?name=${item.name}`}>
         <a className={styles.card}>
           <h3>{item.name} &rarr;</h3>
-            <p>{item.description}</p>
+          <p>{item.description}</p>
+          {item.images && <img src={item.images} />}
         </a>
       </Link>
       <button className="btn-red" onClick={handleDelete}>delete</button>

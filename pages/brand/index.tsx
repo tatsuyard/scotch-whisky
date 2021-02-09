@@ -33,6 +33,7 @@ export default function Home(params) {
         id: doc.id,
         name: doc.data().name,
         description: doc.data().description,
+        images: doc.data().images,
       }))
       setBrands(data)
     })
