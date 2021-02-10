@@ -19,6 +19,7 @@ const Brand: React.FC = () => {
     id: '',
     name: '',
     description: '',
+    images: '',
     createdAt: null,
   });
 
