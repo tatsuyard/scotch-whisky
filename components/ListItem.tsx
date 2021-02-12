@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import initFirebase from "../firebase/init";
@@ -15,14 +15,14 @@ type Props = {
 
 const ListItem: React.FC<Props> = (props: Props) => {
   const item = props.item;
-  const handleDelete = useCallback(() => {
+  const handleDelete = () => {
     alert('delete?');
     try {
       db.collection(Collection.brands).doc(props.item.id).delete()
     } catch (error) {
       alert(error)
     }
-  }, [])
+  }
 
   return (
     <div className={styles.grid}>
