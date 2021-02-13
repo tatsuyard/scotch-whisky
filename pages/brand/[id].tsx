@@ -68,6 +68,7 @@ const Brand: React.FC = () => {
         <p className="text-center text-teal-200 text-2xl py-4">
         {brandItem.description}
         </p>
+        {brandItem.images && <img src={brandItem.images} />}
         <h2>reviews</h2>
         <div className="pt-4">
           {reviews.map((review) => (
