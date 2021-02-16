@@ -14,7 +14,7 @@ export default function Home() {
       </div>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Scoch Whisky!</h1>
+        <h1 className={styles.title}>Welcome to Scotch Whisky!</h1>
       </main>
 
       <footer className={styles.footer}>
