@@ -49,11 +49,14 @@ export default function Home(params) {
       </div>
       <main className={styles.main}>
         <h1 className={styles.title}>銘柄一覧</h1>
-        { currentUser && <CreateLink /> }
-        {
-          brands.map(brand =>
-            <ListItem key={brand.id} item={brand} />
-          )}
+        {currentUser && <CreateLink />}
+        <div className="grid grid-cols-3 grid-rows-3">
+          {
+            brands.map(brand =>
+              <ListItem key={brand.id} item={brand} />
+            )
+          }
+        </div>
       </main>
     </div>
   );
