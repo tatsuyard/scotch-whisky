@@ -4,7 +4,7 @@ import Header from "../components/Header";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div className="container mx-auto">
       <Head>
         <title>Scotch Whisky</title>
         <link rel="icon" href="/favicon.ico" />
