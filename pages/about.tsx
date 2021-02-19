@@ -3,7 +3,7 @@ import styles from "../styles/Home.module.css";
 import Header from "../components/Header";
 
 const About: React.FC = () => (
-  <div className={styles.container}>
+  <div className="container mx-auto">
     <div>
       <Header />
     </div>

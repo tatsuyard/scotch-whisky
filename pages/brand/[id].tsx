@@ -58,7 +58,7 @@ const Brand: React.FC = () => {
   }, [])
 
   return (
-    <div className={styles.container}>
+    <div className="container mx-auto">
       <div>
         <Header />
       </div>
