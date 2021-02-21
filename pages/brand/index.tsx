@@ -43,7 +43,7 @@ export default function Home(params) {
   }, [])
   
   return (
-    <div className={styles.container}>
+    <div className="container mx-auto">
       <div>
         <Header />
       </div>
