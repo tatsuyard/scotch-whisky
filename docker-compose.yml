@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   nextjs:
     build:
@@ -10,4 +10,5 @@ services:
       - /usr/src/app/node_modules
       - /usr/src/app/.next
     ports:
-      - "3000:3000"
+      - '3000:3000'
+      - '9005:9005' # for firebaseCLI
