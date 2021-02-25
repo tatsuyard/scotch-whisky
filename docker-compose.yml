@@ -12,3 +12,4 @@ services:
     ports:
       - '3000:3000'
       - '9005:9005' # for firebaseCLI
+      - '5000:5000' # for cloud function runtime emulator

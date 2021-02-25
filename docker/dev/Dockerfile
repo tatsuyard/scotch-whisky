@@ -9,6 +9,8 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
 COPY package-lock.json /usr/src/app
+# install Firebase CLI Tools
+RUN npm install -g firebase-tools
 RUN npm install
 
 COPY . /usr/src/app
