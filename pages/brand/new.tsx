@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
 import initFirebase from "../../firebase/init";
@@ -25,6 +25,18 @@ const New: React.FC = () => {
   })
   const [file, setFile] = useState<ImageFile>();
   const router = useRouter()
+
+  useEffect(() => {
+    firebase.auth().currentUser.getIdTokenResult()
+      .then((idTokenResult) => {
+        if (!idTokenResult.claims.admin) {
+          router.push('/brand');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handleImageAsFile = (e) => {
     if (e.target.files === '') {
