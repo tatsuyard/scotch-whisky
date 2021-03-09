@@ -2,11 +2,23 @@ import React, { useState, useEffect, useContext } from "react";
 import styles from "../../styles/Home.module.css";
 import Header from "../../components/Header";
 import Link from "next/link";
+import firebase from "firebase/app";
 import { AuthContext } from '../../components/Auth';
 import ListItem from "../../components/ListItem";
 import { Collection } from "../../consts";
 import { Brand } from '../../models';
 
+let isAdmin = false;
+
+firebase.auth().currentUser.getIdTokenResult()
+  .then((idTokenResult) => {
+     if (idTokenResult.claims.admin) {
+       isAdmin = true;
+     }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 export default function Home(params) {
   const { db } = params;
@@ -19,14 +31,6 @@ export default function Home(params) {
   }]);
   const { currentUser } = useContext(AuthContext);
   
-  const CreateLink = () => (
-    <Link href="brand/new">
-      <button className="btn-blue">
-        Create
-      </button>
-    </Link>
-  )
-
   useEffect(() => {
     const col = db.collection(Collection.brands).onSnapshot((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
@@ -41,7 +45,15 @@ export default function Home(params) {
       col
     }
   }, [])
-  
+
+  const CreateLink = () => (
+    <Link href="brand/new">
+      <button className="btn-blue">
+        Create
+      </button>
+    </Link>
+  )
+
   return (
     <div className="container mx-auto">
       <div>
@@ -49,7 +61,7 @@ export default function Home(params) {
       </div>
       <main className={styles.main}>
         <h1 className={styles.title}>銘柄一覧</h1>
-        {currentUser && <CreateLink />}
+        {currentUser && isAdmin && <CreateLink />}
         <div className="grid grid-cols-3 grid-rows-3">
           {
             brands.map(brand =>
