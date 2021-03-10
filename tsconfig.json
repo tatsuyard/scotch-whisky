@@ -26,6 +26,7 @@
     "firebase/init.js"  
   ],
   "exclude": [
-    ["node_modules", "functions"]
+    "node_modules",
+    "functions"
   ]
 }
