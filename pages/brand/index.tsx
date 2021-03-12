@@ -10,15 +10,15 @@ import { Brand } from '../../models';
 
 let isAdmin = false;
 
-firebase.auth().currentUser.getIdTokenResult()
-  .then((idTokenResult) => {
-     if (idTokenResult.claims.admin) {
-       isAdmin = true;
-     }
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+// firebase.auth().currentUser.getIdTokenResult()
+//   .then((idTokenResult) => {
+//      if (idTokenResult.claims.admin) {
+//        isAdmin = true;
+//      }
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
 export default function Home(params) {
   const { db } = params;
