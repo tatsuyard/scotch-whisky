@@ -8,17 +8,6 @@ import ListItem from "../../components/ListItem";
 import { Collection } from "../../consts";
 import { Brand } from '../../models';
 
-let isAdmin = false;
-
-// firebase.auth().currentUser.getIdTokenResult()
-//   .then((idTokenResult) => {
-//      if (idTokenResult.claims.admin) {
-//        isAdmin = true;
-//      }
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
 
 export default function Home(params) {
   const { db } = params;
@@ -29,8 +18,22 @@ export default function Home(params) {
     images: '',
     createdAt: null,
   }]);
+  const [admin, setAdmin] = useState(false);
   const { currentUser } = useContext(AuthContext);
   
+  
+  useEffect(() => {
+    firebase.auth().currentUser.getIdTokenResult()
+      .then((idTokenResult) => {
+        if (idTokenResult.claims.admin) {
+          setAdmin(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   useEffect(() => {
     const col = db.collection(Collection.brands).onSnapshot((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
@@ -61,7 +64,7 @@ export default function Home(params) {
       </div>
       <main className={styles.main}>
         <h1 className={styles.title}>銘柄一覧</h1>
-        {currentUser && isAdmin && <CreateLink />}
+        {currentUser && admin && <CreateLink />}
         <div className="grid grid-cols-3 grid-rows-3">
           {
             brands.map(brand =>
