@@ -23,7 +23,9 @@ export default function Home(params) {
   
   
   useEffect(() => {
-    firebase.auth().currentUser.getIdTokenResult()
+    let user = firebase.auth().currentUser;
+    if (user) {
+      user.getIdTokenResult()
       .then((idTokenResult) => {
         if (idTokenResult.claims.admin) {
           setAdmin(true);
@@ -32,6 +34,9 @@ export default function Home(params) {
       .catch((error) => {
         console.log(error);
       });
+    } else {
+      console.log('unauthorized');
+    };
   }, []);
 
   useEffect(() => {
